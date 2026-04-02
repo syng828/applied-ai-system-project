@@ -9,3 +9,9 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Glass Horizon,North Circuit,electronic,energized,0.88,128,0.72,0.84,0.16
+12,Winter Canvas,Aria Vale,classical,contemplative,0.22,68,0.58,0.32,0.97
+13,Sunset Groove,Velvet Frame,funk,groovy,0.79,112,0.83,0.91,0.12
+14,Old Pine Road,Maple Transit,folk,wistful,0.46,96,0.67,0.55,0.88
+15,Neon Furnace,Iron Harbor,metal,aggressive,0.95,160,0.41,0.64,0.07
+16,Late Train Home,Velvet Frame,soul,warm,0.61,84,0.74,0.69,0.63

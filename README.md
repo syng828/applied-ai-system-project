@@ -29,6 +29,18 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+With real world recommendation systems, there is collaborative filtering based on similar user data, and there is content based filtering which recommends with similar characteristics. Real world applications use a combination of these two. However, I will mostly focused on the content based filtering. The Song features that will be used is mainly genre, mood, and energy (while the others weigh less).The User Profile will store the genre, mood, and energy along with the likes acoustic as already written in the template code. A good starting recipe is:
+
+genre match: +2.0 points
+mood match: +1.0 point
+energy similarity: up to +1.0 point based on how close the song's energy is to the user's target
+
+That keeps genre as the strongest signal, mood as a lighter signal, and energy as a smooth tie-breaker. Additional features like acousticness, danceability, and tempo can be added later as smaller bonuses if needed.
+This would choose which songs to recommend by getting data from the songs a user has listened to already.
+
+Some biases that would occur is prioritizing genre as it has the higher weight over other categories.
+
+![Initial recommendation](/assets/images/screenshot-1.png)
 ---
 
 ## Getting Started
