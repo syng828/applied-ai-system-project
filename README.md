@@ -3,7 +3,7 @@ The project was originally a music recommender system. Based on their preference
 
 ## Title and Introduction
 Music Recommender with Stats
-The project does continue to recommend music, however it also gives the confidence and margin of error as a result. This will allow users to see how close the song is to their preferences.
+The project does continue to recommend music, however it also gives the confidence and margin between songs as a result. This will allow users to see how close the song is to their preferences while also getting diverse songs.
 
 ## Architecture
 The architecture of the project is displayed below:
@@ -106,6 +106,22 @@ You can add more tests in tests/test_recommender.py.
     Why   : energy closeness (+0.85); reliability: confidence=0.28; margin=0.85; fallback=off
 
 ## Design Decisions
-As stated in the previous project, the genre, mood, and energy are of equal weights to ensure that non conventional songs would show up regardless of their genre. I decided to add the confidence and margin to truly see how close the song is to a user preferences. For instance, the first and last example have fairly high confidence because of how close it is to their preferences while the second example has low confidence because of how different the genre, mood, and energy are together. The tradeoff with this is that it may add complexity for a user who does not know what confidence is, but this can be offset by creating a UI and a percentage that shows how close it matches their preferences. 
+As stated in the previous project, the genre, mood, and energy are of equal weights to ensure that non conventional songs would show up regardless of their genre. I decided to add the confidence and margin to truly see how close the song is to a user preferences. For instance, the first and last example have fairly high confidence because of how close it is to their preferences while the second example has low confidence because of how different the genre, mood, and energy are together. The tradeoff with this is that it may add complexity for a user who does not know what confidence is, but this can be offset by creating a UI and a percentage that shows how close it matches their preferences. Additionally, the margin is between songs and when low it recommends other genres to give more varied songs, especially when the model is not very confident.
 
 ## Testing
+There are 8 tests as described below:
+1. Verifies ranking quality for pop/happy/high-energy songs
+2. Calls explain_recommendation for a song and asserts that it is not blank
+3. Verifies artists diversity, that it will return 2 different artists when both are high scoring
+4. Tests that the confidence and margin are returned
+5. Verifies margin are computer per selected song (For this one, it originally computed it globally)
+6. Added an empty input test
+7. Added tie/fallback behavior (this test failed intially, but the desired output is the 1st and 3rd song, because the fallback should trigger from low margin and so returns the more diverse genre)
+8. Added wrong input type for numeric field, expected to return ValueError
+
+## Reflection
+I learned a lot about how effective AI can be used to generate code and also explain it. I wanted the song results to be more descriptive so it generated the confidence/margin/fallback system. I think overall it made me realize how many ways there are to create unique solutions.
+
+8 out of 8 tests passed, and confidence was high around 0.8 for conventional songs, but turned on fallback for similar songs
+
+The limitations of this system is that it is not very good at generating songs that are not typical. I think that the AI could be misused if someone intentionally generates incorrect song statistics which would mess with the result. I think what surprised me is that the AI is not always right like it had to change its own test but Im also surprised with how well everything works. So an instance where the AI generated something correct is its suggestion to have confidence and margin and it did the calculation quite well, but it did incorrectly made a test result.
