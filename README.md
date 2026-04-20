@@ -1,236 +1,111 @@
-# 🎵 Music Recommender Simulation
+## Original project
+The project was originally a music recommender system. Based on their preferences such as with the genre, mood, and energy, the system recommends some songs that match those categories the closest.
 
-## Project Summary
+## Title and Introduction
+Music Recommender with Stats
+The project does continue to recommend music, however it also gives the confidence and margin of error as a result. This will allow users to see how close the song is to their preferences.
 
-In this project you will build and explain a small music recommender system.
+## Architecture
+The architecture of the project is displayed below:
+[!New project architecture](/assets/images/updated_architecture.png)
 
-Your goal is to:
+The user taste profile is used as the input, then the retriever gets songs from songs.csv, the scorer creates a ranking and the automated tester runs. Both of these go into the reliability layer where it will output the top k recommendations, an explanation, and a reliability report. What was added to this project is the reliability report and there is also a human review component where they can review low confidence songs. 
 
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
+## Setup
+Create a virtual environment (optional but recommended):
 
-Replace this paragraph with your own summary of what your version does.
+```
+python -m venv .venv
+source .venv/bin/activate      # Mac or Linux
+.venv\Scripts\activate         # Windows
+```
 
----
-
-## How The System Works
-
-Explain your design in plain language.
-
-Some prompts to answer:
-
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
-
-You can include a simple diagram or bullet list if helpful.
-
-With real world recommendation systems, there is collaborative filtering based on similar user data, and there is content based filtering which recommends with similar characteristics. Real world applications use a combination of these two. However, I will mostly focused on the content based filtering. The Song features that will be used is mainly genre, mood, and energy (while the others weigh less).The User Profile will store the genre, mood, and energy along with the likes acoustic as already written in the template code. A good starting recipe is:
-
-genre match: +1.0 points
-mood match: +1.0 point
-energy similarity: up to +1.0 point based on how close the song's energy is to the user's target
-
-That keeps genre as the strongest signal, mood as a lighter signal, and energy as a smooth tie-breaker. Additional features like acousticness, danceability, and tempo can be added later as smaller bonuses if needed.
-This would choose which songs to recommend by getting data from the songs a user has listened to already.
-
-Some biases that would occur is prioritizing genre as it has the higher weight over other categories.
-
-Pop, happy, 0.8 energy:
-![Initial recommendation](/assets/images/screenshot-1.png)
-
-Rock, sad, 0.3 energy: 
-![Rock, sad](/assets/images/screenshot-2.png)
-
-Jazz, relaxed, 0.5 energy: 
-![Jazz, relaxed](/assets/images/screenshot-3.png)
-
-Lofi, intense, 0.9 energy:
-![Lofi, intense](/assets/images/screenshot-4.png)
-
----
-
-## Getting Started
-
-### Setup
-
-1. Create a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
-
-2. Install dependencies
-
-```bash
+Install dependencies
+```
 pip install -r requirements.txt
 ```
 
-3. Run the app:
-
-```bash
+Run the app:
+```
 python -m src.main
 ```
-
-### Running Tests
-
+Running Tests
 Run the starter tests with:
-
-```bash
+```
 pytest
 ```
+You can add more tests in tests/test_recommender.py.
 
-You can add more tests in `tests/test_recommender.py`.
+## Sample Interactions
+1. User Preferences: {'genre': 'pop', 'mood': 'happy', 'energy': 0.8}
 
----
+#1  Sunrise City by Neon Echo
+    Score : 2.98
+    Why   : genre match (+1.0); mood match (+1.0); energy closeness (+0.98); reliability: confidence=0.99; margin=1.02; fallback=off
 
-## Experiments You Tried
+#2  Rooftop Lights by Indigo Parade
+    Score : 1.96
+    Why   : mood match (+1.0); energy closeness (+0.96); reliability: confidence=0.65; margin=0.09; fallback=off
 
-Use this section to document the experiments you ran. For example:
+#3  Gym Hero by Max Pulse
+    Score : 1.87
+    Why   : genre match (+1.0); energy closeness (+0.87); reliability: confidence=0.62; margin=0.88; fallback=off
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+#4  Sunset Groove by Velvet Frame
+    Score : 0.99
+    Why   : energy closeness (+0.99); reliability: confidence=0.33; margin=0.07; fallback=off
 
-Changing the genre to 0.5 prioritized the other categories like mood and energy more, and tempo or valence added more variety. I did change the genre to 1.0 though, but it seems to behave better for typical preferences.
----
+#5  Glass Horizon by North Circuit
+    Score : 0.92
+    Why   : energy closeness (+0.92); reliability: confidence=0.31; margin=0.92; fallback=off
 
-## Limitations and Risks
 
-Summarize some limitations of your recommender.
+2. User Preferences: {'genre': 'rock', 'mood': 'sad', 'energy': 0.3} 
 
-Examples:
+#1  Storm Runner by Voltline
+    Score : 1.39
+    Why   : genre match (+1.0); energy closeness (+0.39); reliability: confidence=0.46; margin=0.41; fallback=on
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+#2  Spacewalk Thoughts by Orbit Bloom
+    Score : 0.98
+    Why   : energy closeness (+0.98); reliability: confidence=0.33; margin=0.03; fallback=on
 
-You will go deeper on this in your model card.
-It only has a few songs, and favors conventional songs.
+#3  Library Rain by Paper Lanterns
+    Score : 0.95
+    Why   : energy closeness (+0.95); reliability: confidence=0.32; margin=0.02; fallback=on
 
----
+#4  Coffee Shop Stories by Slow Stereo
+    Score : 0.93
+    Why   : energy closeness (+0.93); reliability: confidence=0.31; margin=0.01; fallback=on
 
-## Reflection
+#5  Winter Canvas by Aria Vale
+    Score : 0.92
+    Why   : energy closeness (+0.92); reliability: confidence=0.31; margin=0.92; fallback=on
 
-Read and complete `model_card.md`:
 
-[**Model Card**](model_card.md)
+3. User Preferences: {'genre': 'jazz', 'mood': 'relaxed', 'energy': 0.5}
 
-Write 1 to 2 paragraphs here about what you learned:
+#1  Coffee Shop Stories by Slow Stereo
+    Score : 2.87
+    Why   : genre match (+1.0); mood match (+1.0); energy closeness (+0.87); reliability: confidence=0.96; margin=1.91; fallback=off
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+#2  Old Pine Road by Maple Transit
+    Score : 0.96
+    Why   : energy closeness (+0.96); reliability: confidence=0.32; margin=0.04; fallback=off
 
-I learned that recommenders can turn data into predictions through weights. Some weights could be considered more than others based on what is usually prefer. However, recommenders would show more songs that are in a greater amount in the data, such as for instance showing LoFi more simply because there is more of that in the data. It would also not know how to show unconventional songs.
----
+#3  Midnight Coding by LoRoom
+    Score : 0.92
+    Why   : energy closeness (+0.92); reliability: confidence=0.31; margin=0.03; fallback=off
 
-## 7. `model_card_template.md`
+#4  Late Train Home by Velvet Frame
+    Score : 0.89
+    Why   : energy closeness (+0.89); reliability: confidence=0.30; margin=0.04; fallback=off
 
-Combines reflection and model card framing from the Module 3 guidance. :contentReference[oaicite:2]{index=2}  
+#5  Library Rain by Paper Lanterns
+    Score : 0.85
+    Why   : energy closeness (+0.85); reliability: confidence=0.28; margin=0.85; fallback=off
 
-```markdown
-# 🎧 Model Card - Music Recommender Simulation
+## Design Decisions
+As stated in the previous project, the genre, mood, and energy are of equal weights to ensure that non conventional songs would show up regardless of their genre. I decided to add the confidence and margin to truly see how close the song is to a user preferences. For instance, the first and last example have fairly high confidence because of how close it is to their preferences while the second example has low confidence because of how different the genre, mood, and energy are together. The tradeoff with this is that it may add complexity for a user who does not know what confidence is, but this can be offset by creating a UI and a percentage that shows how close it matches their preferences. 
 
-## 1. Model Name
-
-Give your recommender a name, for example:
-
-> VibeFinder 1.0
-
----
-
-## 2. Intended Use
-
-- What is this system trying to do
-- Who is it for
-
-Example:
-
-> This model suggests 3 to 5 songs from a small catalog based on a user's preferred genre, mood, and energy level. It is for classroom exploration only, not for real users.
-
----
-
-## 3. How It Works (Short Explanation)
-
-Describe your scoring logic in plain language.
-
-- What features of each song does it consider
-- What information about the user does it use
-- How does it turn those into a number
-
-Try to avoid code in this section, treat it like an explanation to a non programmer.
-
----
-
-## 4. Data
-
-Describe your dataset.
-
-- How many songs are in `data/songs.csv`
-- Did you add or remove any songs
-- What kinds of genres or moods are represented
-- Whose taste does this data mostly reflect
-
----
-
-## 5. Strengths
-
-Where does your recommender work well
-
-You can think about:
-- Situations where the top results "felt right"
-- Particular user profiles it served well
-- Simplicity or transparency benefits
-
----
-
-## 6. Limitations and Bias
-
-Where does your recommender struggle
-
-Some prompts:
-- Does it ignore some genres or moods
-- Does it treat all users as if they have the same taste shape
-- Is it biased toward high energy or one genre by default
-- How could this be unfair if used in a real product
-
----
-
-## 7. Evaluation
-
-How did you check your system
-
-Examples:
-- You tried multiple user profiles and wrote down whether the results matched your expectations
-- You compared your simulation to what a real app like Spotify or YouTube tends to recommend
-- You wrote tests for your scoring logic
-
-You do not need a numeric metric, but if you used one, explain what it measures.
-
----
-
-## 8. Future Work
-
-If you had more time, how would you improve this recommender
-
-Examples:
-
-- Add support for multiple users and "group vibe" recommendations
-- Balance diversity of songs instead of always picking the closest match
-- Use more features, like tempo ranges or lyric themes
-
----
-
-## 9. Personal Reflection
-
-A few sentences about what you learned:
-
-- What surprised you about how your system behaved
-- How did building this change how you think about real music recommenders
-- Where do you think human judgment still matters, even if the model seems "smart"
-
+## Testing

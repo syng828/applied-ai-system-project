@@ -27,19 +27,27 @@ def main() -> None:
     user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
 
     recommendations = recommend_songs(user_prefs, songs, k=5)
+    print("User Preferences:", user_prefs)
     display_recommendations(recommendations)
+    print("\n")
 
     user_prefs = {"genre": "rock", "mood": "sad", "energy": 0.3}
     recommendations = recommend_songs(user_prefs, songs, k=5)
+    print("User Preferences:", user_prefs)
     display_recommendations(recommendations)
+    print("\n")
 
     user_prefs = {"genre": "jazz", "mood": "relaxed", "energy": 0.5}
     recommendations = recommend_songs(user_prefs, songs, k=5)
+    print("User Preferences:", user_prefs)
     display_recommendations(recommendations)
+    print("\n")
 
     user_prefs = {"genre": "lofi", "mood": "intense", "energy": 0.9}
     recommendations = recommend_songs(user_prefs, songs, k=5)
+    print("User Preferences:", user_prefs)
     display_recommendations(recommendations)
+    print("\n")
 
 
 if __name__ == "__main__":
