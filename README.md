@@ -125,3 +125,6 @@ I learned a lot about how effective AI can be used to generate code and also exp
 8 out of 8 tests passed, and confidence was high around 0.8 for conventional songs, but turned on fallback for similar songs
 
 The limitations of this system is that it is not very good at generating songs that are not typical. I think that the AI could be misused if someone intentionally generates incorrect song statistics which would mess with the result. I think what surprised me is that the AI is not always right like it had to change its own test but Im also surprised with how well everything works. So an instance where the AI generated something correct is its suggestion to have confidence and margin and it did the calculation quite well, but it did incorrectly made a test result.
+
+## Demo
+https://www.loom.com/share/3d7ee61e9993497cb24abfe08f2800b0
