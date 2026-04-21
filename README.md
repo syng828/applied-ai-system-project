@@ -7,7 +7,7 @@ The project does continue to recommend music, however it also gives the confiden
 
 ## Architecture
 The architecture of the project is displayed below:
-[!New project architecture](/assets/images/updated_architecture.png)
+![New project architecture](/assets/images/updated_architecture.png)
 
 The user taste profile is used as the input, then the retriever gets songs from songs.csv, the scorer creates a ranking and the automated tester runs. Both of these go into the reliability layer where it will output the top k recommendations, an explanation, and a reliability report. What was added to this project is the reliability report and there is also a human review component where they can review low confidence songs. 
 
