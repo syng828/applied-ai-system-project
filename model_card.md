@@ -5,7 +5,7 @@
 Give your model a short, descriptive name.  
 Example: **VibeFinder 1.0**  
 
-I chose Vibify 1.0, combining Spotify and Vibe Coding.
+I chose Vibify 2.0, combining Spotify and Vibe Coding and added the confidence and margin feature.
 
 ---
 
@@ -19,7 +19,7 @@ Prompts:
 - What assumptions does it make about the user  
 - Is this for real users or classroom exploration   
 
-The recommendations suggests 5 songs, based on genre, mood, and energy. It is for classroom exploration more as there are only 16 songs.
+The recommendations suggests 5 songs, based on genre, mood, and energy. It is for classroom exploration more as there are only 16 songs.IT assumes that the user wants to listen to a variety of songs because it will recommend other genres if the margin between two song recommendations are small.
 
 ---
 
@@ -42,6 +42,8 @@ mood match: +1.0 point
 energy similarity: up to +1.0 point based on how close the song's energy is to the user's target
 
 From the starter logic the genre had 2.0 points but it was too heavy so it switched to 1.0 points.
+
+The added code is that it also measures the confidence of how well it fits the user preferences. 
 
 ---
 
@@ -86,6 +88,7 @@ Prompts:
 - Ways the scoring might unintentionally favor some users  
 
 Some limitations include that there are little songs with mid-range energy, with a 0.23 spread which makes it meaningless. Additionally, there are no songs with "sad" and negative valnece mood. There are no partial credit for adjacent genres such as indie pop vs pop. Lofi has the greatest amount of songs and lastly some of the fields are just completely ignored like valence and such. The scoring system would favor users that have more songs with a certain genre or mood or energy like Chill Lofi.
+Another limitation is that it can give low confidence songs if the songs are not typical in terms of genre, mood, and energy.
 
 ---
 
